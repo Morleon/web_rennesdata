@@ -8,19 +8,14 @@ import { ApiService } from '../api.service';
 })
 export class ShowdataComponent implements OnInit {
 
-
 	donnees;
 
 	constructor(private apiService: ApiService) { }
 
 	ngOnInit(): void {
 		this.apiService.getInfo().subscribe((data)=>{
-			console.log(data);
 			this.donnees = data;
 			console.log(this.donnees)
 		});
 	}
-
-
-
 }
