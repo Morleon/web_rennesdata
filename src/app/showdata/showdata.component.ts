@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-showdata',
@@ -7,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowdataComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
-  
-  }
+	donnees;
+
+	constructor(private apiService: ApiService) { }
+
+	ngOnInit(): void {
+		this.apiService.getInfo().subscribe((data)=>{
+			console.log(data);
+			this.donnees = data['articles'];
+		});
+	}
 
 }
