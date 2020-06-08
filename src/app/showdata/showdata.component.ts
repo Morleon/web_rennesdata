@@ -11,6 +11,10 @@ export class ShowdataComponent implements OnInit {
 	objectKeys = Object.keys;
 
 	donnees;
+	resultats;
+	candidats;
+	value;
+	circ_value;
 	circs = [{value: '1', viewValue: '1ère Circonscription'},
 		 {value: '2', viewValue: '2ème Circonscription'},
 		 {value: '3', viewValue: '3ème Circonscription'},
@@ -20,7 +24,6 @@ export class ShowdataComponent implements OnInit {
 		 {value: '7', viewValue: '7ème Circonscription'},
 		 {value: '8', viewValue: '8ème Circonscription'},
 		 {value: '9', viewValue: '9ème Circonscription'},
-		 {value: '10', viewValue: '10ème Circonscription'},
 	];
 
 	// permet d'effectuer l'import
@@ -30,8 +33,14 @@ export class ShowdataComponent implements OnInit {
 		this.apiService.getInfo().subscribe((data)=>{
 			this.donnees = data;
 			console.log(this.donnees)
-			this.createLists(0)
+			this.createLists(this.circ_value)
 		});
+	}
+
+	getChoice(choix) {
+		console.log(choix);
+		this.value = choix
+		this.createLists(choix)
 	}
 
 	createLists(num_circ) {
@@ -212,9 +221,6 @@ export class ShowdataComponent implements OnInit {
 		var resultat = this.donnees.records[num_circ].fields.pourcentage_34;
 		this.candidats.push(candidat);
 		this.resultats.push(resultat);
-
-		console.log(this.resultats)
-		console.log(this.candidats)
 	}
 
 }

@@ -9,7 +9,3 @@ tr{
 table { border-collapse: collapse; }
 tr { border: none; 
 border-bottom: solid 1px;}
-td {
-  border-right: solid 1px #f00; 
-  border-left: solid 1px #f00;
-
