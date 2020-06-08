@@ -16,3 +16,17 @@
 	</ng-container>
 </table>
 -->
+<p>Le dataset {{donnees.records[0].datasetid}} présente les résultats des élections européennes à Rennes</p>
+<p>Le candidat 1 dans la circonscription 1 est {{donnees.records[0].fields.candidat_1}}</p>
+
+<table>
+	<thead>
+		<tr>
+			<th>Candidat</th>
+			<th>Resultat</th>
+		</tr>
+	</thead>
+	<tbody>
+		<td><tr *ngFor="let candidat of candidats">{{candidat}}</tr></td>
+		<td><tr *ngFor="let resultat of resultats">{{resultat}}</tr></td>
+	</tbody>

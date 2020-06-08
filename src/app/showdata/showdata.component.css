@@ -2,3 +2,14 @@
   opacity: 0.75;
   font-size: 0.75em;
 }
+tr{
+	text-align: center;
+}
+
+table { border-collapse: collapse; }
+tr { border: none; 
+border-bottom: solid 1px;}
+td {
+  border-right: solid 1px #f00; 
+  border-left: solid 1px #f00;
+
