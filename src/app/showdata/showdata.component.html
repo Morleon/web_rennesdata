@@ -1,27 +1,23 @@
 <p>Le dataset {{donnees.records[0].datasetid}} présente les résultats des élections européennes du {{donnees.records[0].fields.date_election}} à Rennes</p>
-<p>La participation au bureau de vote {{ donnees.records[0].fields.nom_lieu }} est de {{donnees.records[0].fields.pourcentage_participation}}%</p>
-<p>La participation dans la 2ème circonscription est de {{donnees.records[1].fields.pourcentage_participation}}%</p>
-<p>La participation dans la circonscription 8 est de {{donnees.records[0].fields.pourcentage_participation}}%</p>
-<p>La participation dans la circonscription 8 est de {{donnees.records[0].fields.pourcentage_participation}}%</p>
-<p>La participation dans la circonscription 8 est de {{donnees.records[0].fields.pourcentage_participation}}%</p>
-<p>La participation dans la circonscription 8 est de {{donnees.records[0].fields.pourcentage_participation}}%</p>
-<p>La participation dans la circonscription 8 est de {{donnees.records[0].fields.pourcentage_participation}}%</p>
-<p>La participation dans la 8ème circonscription est de {{donnees.records[0].fields.pourcentage_participation}}%</p>
-<p>La participation dans la circonscription 8 est de {{donnees.records[0].fields.pourcentage_participation}}%</p>
-<p>La participation dans la circonscription 8 est de {{donnees.records[0].fields.pourcentage_participation}}%</p>
+
 <br>
 <mat-form-field>
   <mat-select placeholder="Circonscription">
-    <mat-option *ngFor="let circ of circs" [value]="circ.value">
-      {{ circ.viewValue }}
-    </mat-option>
+    <mat-option *ngFor="let circ of circs" [(value)]="circ.value" (click)="getChoice(circ.value)">{{ circ.viewValue }}</mat-option>
   </mat-select>
 </mat-form-field>
 
-<!-- <table mat-table [dataSource]="objectKeys(donnees.records[0].fields)" matSort>
-	<ng-container matColumnDef="Candidat">
-		<th mat-header-cell *matHeaderCellDef>Candidat</th>
-		<td mat-cell *matCellDef="let nom_candidat">{{nom_candidat.candidat}}</td>
-	</ng-container>
+<table *ngIf="value">
+	<thead>
+		<tr>
+			<th>Candidat</th>
+			<th>Resultat</th>
+		</tr>
+	</thead>
+	<tbody>
+		<td><tr *ngFor="let candidat of candidats">{{candidat}}</tr></td>
+		<td><tr *ngFor="let resultat of resultats">{{resultat}}%</tr></td>
+	</tbody>
 </table>
--->
+<br>
+<p *ngIf="value">La participation au bureau de vote {{lieu}} est de {{per_part}}% et le nombre de votes blanc est de {{blanc}}.</p>
