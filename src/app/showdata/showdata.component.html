@@ -1,4 +1,4 @@
-<p>Le dataset {{donnees.records[0].datasetid}} présente les résultats des élections européennes du {{donnees.records[0].fields.date_election}} à Rennes</p>
+<p *ngIf="donnees">Le dataset {{donnees.records[0].datasetid}} présente les résultats des élections européennes du {{donnees.records[0].fields.date_election}} à Rennes</p>
 
 <br>
 <mat-form-field>
