@@ -1,12 +1,15 @@
 <p *ngIf="donnees">Le dataset {{donnees.records[0].datasetid}} présente les résultats des élections européennes du {{donnees.records[0].fields.date_election}} à Rennes</p>
 
 <br>
+
+<!-- le sélecteur de bureau de vote -->
 <mat-form-field>
   <mat-select placeholder="Circonscription">
     <mat-option *ngFor="let circ of circs" [(value)]="circ.value" (click)="getChoice(circ.value)">{{ circ.viewValue }}</mat-option>
   </mat-select>
 </mat-form-field>
 
+<!-- le tableau de résultats -->
 <table *ngIf="value">
 	<thead>
 		<tr>
@@ -19,5 +22,6 @@
 		<td><tr *ngFor="let resultat of resultats">{{resultat}}%</tr></td>
 	</tbody>
 </table>
+<!-- les données du bureau de vote -->
 <br>
 <p *ngIf="value">La participation au bureau de vote {{lieu}} est de {{per_part}}% et le nombre de votes blanc est de {{blanc}}.</p>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -7,41 +7,59 @@ import { ApiService } from '../api.service';
   templateUrl: './showdata.component.html',
   styleUrls: ['./showdata.component.css']
 })
+/**
+* Composant qui permet d'afficher les données importantes de l'API Rennes métropole
+*/
 export class ShowdataComponent implements OnInit {
-	objectKeys = Object.keys;
+	
+	//contient le json de données
 	donnees;
-
+	//les listes affichées dans le tableau
 	resultats;
 	candidats;
+	//les valeurs permettant de récupérer le choix de bureau de vote
 	value;
 	circ_value;
+	//les données affichées sur l'application
 	lieu;
 	per_part;
 	blanc;
 
-	// permet d'effectuer l'import
+	// liste qui rattache chaque bureau de vote à une valeur.
+	circs = [{value: '0', viewValue: "Cité Internationale Paul Ricoeur"},
+		{value: '1', viewValue: "Groupe Scolaire Marcel Pagnol"},
+		{value: '2', viewValue: "Groupe Scolaire des Clôteaux 1"},
+		{value: '3', viewValue: "Groupe Scolaire Jules Isaac"},
+		{value: '4', viewValue: "Groupe Scolaire Carle Bahon"},
+		{value: '5', viewValue: "Groupe Scolaire des Clôteaux 2"},
+		{value: '6', viewValue: "Gymnase Lesseps"},
+		{value: '7', viewValue: "Groupe Scolaire de l'Ille"},
+		{value: '8', viewValue: "Mairie"},
+		{value: '9', viewValue: "Groupe Scolaire Jean Rostand"},
+	];
+
+	/*
+	* Constructeur du composant
+	*/
 	constructor(private apiService: ApiService) { }
 
+	// méthode appelée dès que le composant est instancié
+	/**
+	* méthode appelée dès que le composant est instancié
+	*/
 	ngOnInit() {
+		//permet d'effectuer l'appel à la méthode du service
 		this.apiService.getInfo().subscribe((data)=>{
 			this.donnees = data;
 			console.log(this.donnees)
-			this.createLists(this.circ_value)
 		});
 	}
 
-	circs = [{value: '0', viewValue: "Cité Internationale Paul Ricoeur"},
-		 {value: '1', viewValue: "Groupe Scolaire Marcel Pagnol"},
-		 {value: '2', viewValue: "Groupe Scolaire des Clôteaux 1"},
-		 {value: '3', viewValue: "Groupe Scolaire Jules Isaac"},
-		 {value: '4', viewValue: "Groupe Scolaire Carle Bahon"},
-		 {value: '5', viewValue: "Groupe Scolaire des Clôteaux 2"},
-		 {value: '6', viewValue: "Gymnase Lesseps"},
-		 {value: '7', viewValue: "Groupe Scolaire de l'Ille"},
-		 {value: '8', viewValue: "Mairie"},
-		 {value: '9', viewValue: "Groupe Scolaire Jean Rostand"},
-	];
-
+	/**
+	* méthode qui permet de récupérer le choix de bureau de vote de l'utilisateur
+	* puis d'appeler les méthodes qui permettent de créer le tableau de résultats.
+	* @param choix le choix de l'utilisateur sous forme d'entier
+	*/
 	getChoice(choix) {
 		console.log(choix);
 		this.value = choix
@@ -58,12 +76,18 @@ export class ShowdataComponent implements OnInit {
 
 	}
 
+	/**
+	* permet d'initialiser les deux listes (candidats et résultats) en fonction
+	* du bureau de vote
+	* @param num_circ le choix du bureau de vote
+	*/
 	createLists(num_circ) {
 
 		if (num_circ == null){
 			num_circ = 0
 		}
 
+		//crée les listes
 		this.resultats = new Array();
 		this.candidats = new Array();
 
